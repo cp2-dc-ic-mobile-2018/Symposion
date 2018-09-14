@@ -18,12 +18,16 @@ public class cadastrar extends Activity {
         Intent intent = new Intent(this, cadastrado.class);
         EditText nomeUsuario = findViewById(R.id.idNome);
         String nome = nomeUsuario.getText().toString();
+
         EditText senhaUsuario = findViewById(R.id.idSenha);
         String senha = nomeUsuario.getText().toString();
+
         EditText emailUsuario = findViewById(R.id.idEmail);
         String email = emailUsuario.getText().toString();
+
         EditText cpfUsuario = findViewById(R.id.idCpf);
         String cpf = cpfUsuario.getText().toString();
+
         intent.putExtra("nome", nome);
         intent.putExtra("email", email);
         intent.putExtra("cpf", cpf);
