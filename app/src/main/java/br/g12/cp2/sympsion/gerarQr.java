@@ -1,8 +1,7 @@
-package com.example.labcaxias.gerandoqrcode;
+package br.g12.cp2.sympsion;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +14,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-public class MainActivity extends Activity {
+public class gerarQr extends Activity {
+
     Button btnGerar;
     EditText nome;
     ImageView codigo;
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_gerar_qr);
 
         iniciarComponentes();
         clickButton();
@@ -31,10 +31,10 @@ public class MainActivity extends Activity {
 
     private void clickButton() {
         btnGerar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                gerarQRcode();
-            }
+                                        @Override
+                                        public void onClick(View view) {
+                                            gerarQRcode();
+                                        }
 
                                     }
 
@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
         try {
             BitMatrix bitMatrix = multiFormatWriter.encode(texto, BarcodeFormat.QR_CODE, 200,200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            Bitmap bitmap = bitmap.createBitmap();
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             codigo.setImageBitmap(bitmap);
         }catch (WriterException e)
         {
@@ -64,3 +64,4 @@ public class MainActivity extends Activity {
 
     }
 }
+
