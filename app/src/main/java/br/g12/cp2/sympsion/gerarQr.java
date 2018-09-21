@@ -47,7 +47,7 @@ public class gerarQr extends Activity {
         String tcpf = cpf.getText().toString();
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
-        String resultado = texto + " " + tcpf;
+        String resultado = texto + ";" + tcpf;
 
         try {
             BitMatrix bitMatrix = multiFormatWriter.encode(resultado, BarcodeFormat.QR_CODE, 300,300);
