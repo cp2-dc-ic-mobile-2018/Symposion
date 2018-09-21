@@ -11,13 +11,22 @@
         android:theme="@style/AppTheme">
         <activity android:name=".gerarQr">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="br.g12.cp2.sympsion.GERARQR"/>
             </intent-filter>
         </activity>
-        <activity android:name=".cadastrar" />
-        <activity android:name=".cadastrado"></activity>
+        <activity android:name=".cadastrar">
+            <intent-filter>
+                <action android:name="br.g12.cp2.sympsion.CADASTRAR"/>
+                <!--<action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>-->
+            </intent-filter>
+        </activity>
+        <activity android:name=".cadastrado">
+            <intent-filter>
+                <action android:name="br.g12.cp2.sympsion.CADASTRADO"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
