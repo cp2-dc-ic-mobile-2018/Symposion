@@ -53,6 +53,7 @@ public class BancoDados extends SQLiteOpenHelper {
        sqLiteDatabase.close();
 
 
+
     }
 
 }

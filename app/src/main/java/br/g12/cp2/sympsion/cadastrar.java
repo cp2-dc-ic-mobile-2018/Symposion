@@ -43,5 +43,6 @@ public class cadastrar extends Activity {
 
         Toast.makeText(cadastrar.this, "Cadastro bem sucedido", Toast.LENGTH_LONG).show();
 
+
     }
 }

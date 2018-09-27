@@ -22,10 +22,12 @@ public class Usuarios {
 
     public Usuarios(String _nome, String _email, String _cpf, String _senha)
     {
+
         this.nome = _nome;
         this.email = _email;
         this.cpf = _cpf;
         this.senha = _senha;
+
     }
 
     //=============================================================================================
