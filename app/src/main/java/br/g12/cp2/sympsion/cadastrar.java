@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class cadastrar extends Activity {
+
+    BancoDados bd = new BancoDados(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,12 @@ public class cadastrar extends Activity {
         intent.putExtra("cpf", cpf);
 
         startActivity(intent);
+
+        // TESTE DO CRUD //
+
+        bd.addUsuario(new Usuarios("Matheus Inácio","matheus@cp2.com","1234567891","androidic"));
+
+        Toast.makeText(cadastrar.this, "Cadastro bem sucedido", Toast.LENGTH_LONG).show();
 
     }
 }
