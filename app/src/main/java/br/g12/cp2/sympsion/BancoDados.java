@@ -2,8 +2,12 @@ package br.g12.cp2.sympsion;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BancoDados extends SQLiteOpenHelper {
 
@@ -25,7 +29,7 @@ public class BancoDados extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String QUERY_COLUNA = "CREATE TABLE" + TABELA_USUARIO + "("
+        String QUERY_COLUNA = "CREATE TABLE " + TABELA_USUARIO + "("
                 + COLUNA_ID + " INTEGER PRIMARY KEY, " + COLUNA_NOME +" TEXT, "
                 + COLUNA_EMAIL + " TEXT, " + COLUNA_CPF + " TEXT, " + COLUNA_SENHA + " TEXT) ";
 
@@ -52,7 +56,30 @@ public class BancoDados extends SQLiteOpenHelper {
        sqLiteDatabase.insert(TABELA_USUARIO, null, values);
        sqLiteDatabase.close();
 
+    }
 
+        List<Usuarios> selecionarUsuario() {
+            SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+
+            Cursor cursor = sqLiteDatabase.query(
+                    TABELA_USUARIO,
+                    new String[] { COLUNA_CPF, COLUNA_EMAIL },
+                    null,
+                    null, null, null, null);
+
+            List<Usuarios> lista = new ArrayList<Usuarios>();
+            while(cursor.moveToNext()) {
+                String cpf = cursor.getString(0);
+                String email = cursor.getString(1);
+
+                Usuarios usuarios1 = new Usuarios();
+                usuarios1.setCpf(cpf);
+                usuarios1.setEmail(email);
+                lista.add(usuarios1);
+            }
+
+            return lista;
 
     }
 

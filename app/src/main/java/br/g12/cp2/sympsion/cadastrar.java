@@ -5,16 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class cadastrar extends Activity {
 
-    BancoDados bd = new BancoDados(this);
+    BancoDados bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar);
+
+         bd = new BancoDados(this);
     }
 
     public void enviar (View view) {
@@ -35,13 +40,23 @@ public class cadastrar extends Activity {
         intent.putExtra("email", email);
         intent.putExtra("cpf", cpf);
 
-        startActivity(intent);
+        //startActivity(intent);
 
         // TESTE DO CRUD //
 
         bd.addUsuario(new Usuarios("Matheus Inácio","matheus@cp2.com","1234567891","androidic"));
 
         Toast.makeText(cadastrar.this, "Cadastro bem sucedido", Toast.LENGTH_LONG).show();
+
+        List<Usuarios> usuarios = bd.selecionarUsuario();
+
+        String msg = "";
+        for (Usuarios u : usuarios) {
+            msg += u.getCpf() + " - " + u.getEmail() + '\n';
+        }
+
+        TextView lista = findViewById(R.id.lista);
+        lista.setText(msg);
 
 
     }
