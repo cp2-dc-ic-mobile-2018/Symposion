@@ -44,6 +44,7 @@ public class QrC extends Activity {
         participantes = new ArrayList<String>();
         adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, participantes);
         lista.setAdapter(adaptador);
+
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -56,8 +57,8 @@ public class QrC extends Activity {
                 String[] parts = string.split(";");
                 String part1 = parts[0]; // 004-
                 String part2 = parts[1];
-                participantes.add(part1);
-                participantes.add(part2);
+                participantes.add("Nome do meliante: " + part1 + " (CPF: " + part2 + ")");
+                //participantes.add(part2);
                 adaptador.notifyDataSetChanged();
                 x++;
                 TextView msgem = findViewById(R.id.msgee);
