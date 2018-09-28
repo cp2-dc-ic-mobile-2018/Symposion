@@ -42,7 +42,9 @@ public class QrC extends Activity {
         );
         lista = (ListView) findViewById(R.id.lista);
         participantes = new ArrayList<String>();
-        adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, participantes);
+
+        //adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, participantes);
+        adaptador = new separacaocpfnome(this, android.R.layout.simple_list_item_1, participantes);
         lista.setAdapter(adaptador);
 
     }
@@ -54,11 +56,14 @@ public class QrC extends Activity {
                 //alert(content);
                 alert(result.getContents());
                 String string = result.getContents();
-                String[] parts = string.split(";");
-                String part1 = parts[0]; // 004-
-                String part2 = parts[1];
-                participantes.add("Nome do meliante: " + part1 + " (CPF: " + part2 + ")");
-                //participantes.add(part2);
+
+                participantes.add(string);
+
+                //String[] parts = string.split(";");
+                //String part1 = parts[0]; // 004-
+                //String part2 = parts[1];
+                //participantes.add("Nome do meliante: " + part1 + " (CPF: " + part2 + ")");
+
                 adaptador.notifyDataSetChanged();
                 x++;
                 TextView msgem = findViewById(R.id.msgee);
