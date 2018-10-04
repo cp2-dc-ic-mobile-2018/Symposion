@@ -79,6 +79,7 @@ public class BancoDados extends SQLiteOpenHelper {
             lista.add(usuarios1);
         }
         return lista;
+
    }
 }
 
