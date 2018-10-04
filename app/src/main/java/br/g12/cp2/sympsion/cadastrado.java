@@ -3,6 +3,7 @@ package br.g12.cp2.sympsion;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class cadastrado extends Activity {
@@ -19,5 +20,8 @@ public class cadastrado extends Activity {
         String cpfUsuario = dados.getStringExtra("cpf");
         TextView msg = findViewById(R.id.msg);
         msg.setText("Usuário " + nomeUsuario +" cadastrado com sucesso!" );
+    }
+    public void voltar(View view){
+        finish();
     }
 }
