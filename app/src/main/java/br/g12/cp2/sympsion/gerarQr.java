@@ -32,7 +32,6 @@ public class gerarQr extends Activity {
     }
 
     private void clickButton() {
-        Intent intent  = new Intent(this, cadastrar.class);
         btnGerar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) { gerarQRcode(); }

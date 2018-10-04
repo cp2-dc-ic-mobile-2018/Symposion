@@ -39,7 +39,7 @@ public class cadastrar extends Activity {
 
         // TESTE DO CRUD //
 
-        bd.addUsuario(new Usuarios("Matheus Inácio","matheus@cp2.com","1234567891","androidic"));
+        bd.addUsuario(new Usuarios(nome,email,cpf,senha));
 
         Toast.makeText(cadastrar.this, "Cadastro bem sucedido", Toast.LENGTH_LONG).show();
 

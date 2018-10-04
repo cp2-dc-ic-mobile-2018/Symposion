@@ -26,8 +26,8 @@ public class BancoDados extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
         String QUERY_COLUNA = "CREATE TABLE" + TABELA_USUARIO + "("
-                + COLUNA_ID + " INTEGER PRIMARY KEY, " + COLUNA_NOME +" TEXT, "
-                + COLUNA_EMAIL + " TEXT, " + COLUNA_CPF + " TEXT, " + COLUNA_SENHA + " TEXT) ";
+                + COLUNA_ID + " INTEGER PRIMARY KEY NOT NULL, " + COLUNA_NOME +" TEXT NOT NULL, "
+                + COLUNA_EMAIL + " TEXT NOT NULL, " + COLUNA_CPF + " TEXT NOT NULL, " + COLUNA_SENHA + " TEXT NOT NULL) ";
 
         sqLiteDatabase.execSQL(QUERY_COLUNA);
     }
