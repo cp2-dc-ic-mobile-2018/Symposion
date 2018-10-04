@@ -48,15 +48,15 @@ public class cadastrar extends Activity {
 
         Toast.makeText(cadastrar.this, "Cadastro bem sucedido", Toast.LENGTH_LONG).show();
 
-        //List<Usuarios> usuarios = bd.selecionarUsuario();
+        List<Usuarios> usuarios = bd.selecionarUsuario();
 
-        //String msg = "";
-        //for (Usuarios u : usuarios) {
-            //msg += u.getCpf() + " - " + u.getEmail() + '\n';
-       // }
+        String msg = "";
+        for (Usuarios u : usuarios) {
+            msg += u.getCpf() + " - " + u.getEmail() + '\n';
+        }
 
-       // TextView lista = findViewById(R.id.lista);
-        //lista.setText(msg);
+        TextView lista = findViewById(R.id.lista);
+        lista.setText(msg);
 
 
     }
