@@ -9,14 +9,47 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".QrC" />
-        <activity android:name=".selecioneusuario">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+        <activity android:name=".gerarQr">
+            <intent-filter>
+                <action android:name="br.g12.cp2.sympsion.GERARQR"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".cadastrar">
+            <intent-filter>
+                <action android:name="br.g12.cp2.sympsion.CADASTRAR"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Inicio">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".cadastrado">
+            <intent-filter>
+                <action android:name="br.g12.cp2.sympsion.CADASTRADO"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Palestras"></activity>
+
+        <activity android:name=".QrC">
+			<intent-filter>
+                <action android:name="br.g12.cp2.sympsion.QRC"/>
+            </intent-filter>
+		</activity>
+
+        <activity android:name=".selecioneusuario">
+			<intent-filter>
+                <action android:name="br.g12.cp2.sympsion.SELECIONEUSUARIO"/>
+            </intent-filter>
+		</activity>
+
     </application>
 
 </manifest>
