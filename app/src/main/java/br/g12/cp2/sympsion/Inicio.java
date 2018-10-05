@@ -60,15 +60,13 @@ public class Inicio extends Activity {
             myEditor.putString("CPF", campocpf);
             myEditor.putString("SENHA", camposenha);
             myEditor.commit();
-
+                                                                                                                     
             startActivity(intent);
         }
     }
     public void cadastrar(View view){
-        /*
-        Intent intent = new Intent(this, Cadastro.class);
+        Intent intent = new Intent(this, cadastrar.class);
         startActivity(intent);
-        */
     }
     protected void onResume() {
         super.onResume();
