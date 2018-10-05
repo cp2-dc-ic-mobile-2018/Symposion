@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BancoDados extends SQLiteOpenHelper {
+public class bancoCadastro extends SQLiteOpenHelper {
 
     private static final int VERSAO_BANCO = 1;
     private static final String BANCO_USUARIO = "bd_usuario";
@@ -23,7 +23,7 @@ public class BancoDados extends SQLiteOpenHelper {
     private static final String COLUNA_CPF = "cpf";
     private static final String COLUNA_SENHA = "senha";
 
-    public BancoDados(Context context) {
+    public bancoCadastro(Context context) {
         super(context, BANCO_USUARIO, null, VERSAO_BANCO);
     }
 

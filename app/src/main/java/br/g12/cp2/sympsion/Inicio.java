@@ -65,10 +65,10 @@ public class Inicio extends Activity {
         }
     }
     public void cadastrar(View view){
-        /*
-        Intent intent = new Intent(this, Cadastro.class);
+
+        Intent intent = new Intent(this, cadastrar.class);
         startActivity(intent);
-        */
+
     }
     protected void onResume() {
         super.onResume();
