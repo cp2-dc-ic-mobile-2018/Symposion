@@ -4,16 +4,16 @@ public class dadosPalestra {
     int id;
     String nome;
     String horario;
-    String duracao;
-    String limiteP;
+    int duracao;
+    int limiteP;
     String lugar;
     String descricao;
 
-    public  Palestras() {
+    public  dadosPalestra() {
 
     }
 
-    public  Palestras(int _id, String _nome, String _horario, String _duracao, String _limiteP,
+    public dadosPalestra(int _id, String _nome, String _horario, int _duracao, int _limiteP,
                      String _lugar, String _descricao)
     {
         this.id = _id;
@@ -24,7 +24,7 @@ public class dadosPalestra {
         this.descricao = _descricao;
     }
 
-    public Palestras(String _nome, String _horario, String _duracao, String _limiteP, String _lugar,
+    public dadosPalestra(String _nome, String _horario, int _duracao, int _limiteP, String _lugar,
         String _descricao)
     {
 
@@ -61,19 +61,19 @@ public class dadosPalestra {
         this.horario = horario;
     }
 
-    public String getDuracao() {
+    public int getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(String duracao) {
+    public void setDuracao(int duracao) {
         this.duracao = duracao;
     }
 
-    public String getLimiteP() {
+    public int getLimiteP() {
         return limiteP;
     }
 
-    public void setLimiteP(String limiteP) {
+    public void setLimiteP(int limiteP) {
         this.limiteP = limiteP;
     }
 
