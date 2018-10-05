@@ -182,6 +182,22 @@ public class bancoDados extends SQLiteOpenHelper {
 
         }
     }
+
+    public String VerificaCPF(String cpf) {
+        Cursor cursor;
+        String senha;
+        String[] campos = {TabelaUsuario.COLUNA_CPF, TabelaUsuario.COLUNA_SENHA};
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        cursor = sqLiteDatabase.query(TabelaUsuario.TABELA_USUARIO, campos, TabelaUsuario.COLUNA_CPF + " = '" + cpf + "'", null, null, null, null);
+
+        if (cursor.moveToNext()) {
+            senha = cursor.getString(1);
+        } else {
+            senha = null;
+        }
+        sqLiteDatabase.close();
+        return senha;
+    }
 }
 
 
