@@ -2,6 +2,8 @@ package br.g12.cp2.sympsion;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -79,5 +81,21 @@ public class QrC extends Activity {
     }
     private void alert(String msg){
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
+    }
+
+    String metodo(String parametro){
+        
+        String selectQuery =
+                "SELECT * FROM usuario WHERE cpf =" + parametro;
+        BancoDados  Bd =  new BancoDados(this);
+        SQLiteDatabase banco = Bd.getWritableDatabase();
+
+        Cursor cursor = banco.rawQuery(selectQuery, null);
+
+        cursor.moveToFirst();
+
+        String nomeString = cursor.getString(cursor.getColumnIndex('id'));
+        return nomeString;
+
     }
 }

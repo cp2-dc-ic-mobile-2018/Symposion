@@ -15,7 +15,7 @@ public class selecioneusuario extends Activity {
 
     public void teladevisitante(View view){
 
-        Intent intent = new Intent(this, QrC.class);
+        Intent intent = new Intent(this, gerarQr.class);
         startActivity(intent);
     }
 
@@ -27,7 +27,8 @@ public class selecioneusuario extends Activity {
 
     public void teladepalestrante(View view){
 
-        Intent intent = new Intent(this, QrC.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, QrC.class);
+        //startActivity(intent);
     }
+
 }

@@ -14,12 +14,9 @@ public class separacaocpfnome extends ArrayAdapter<String> {
     public separacaocpfnome(Context context, int textViewResourceId, List<String> participantes) {
         super(context, textViewResourceId, participantes);
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
-
-
         if (v == null) {
             Context ctx = getContext();
             LayoutInflater vi = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -32,11 +29,8 @@ public class separacaocpfnome extends ArrayAdapter<String> {
             String part2 = parts[1];
             ((TextView) v.findViewById(R.id.nome)).setText(part1);
             ((TextView) v.findViewById(R.id.cpf)).setText(part2);
-
         }
         return v;
-
-
     }
 
 
