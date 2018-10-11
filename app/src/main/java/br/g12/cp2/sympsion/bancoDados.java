@@ -187,8 +187,9 @@ public class bancoDados extends SQLiteOpenHelper {
         Cursor cursor;
         String senha;
         String[] campos = {TabelaUsuario.COLUNA_CPF, TabelaUsuario.COLUNA_SENHA};
+        String[] selectionArgs = {cpf};
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        cursor = sqLiteDatabase.query(TabelaUsuario.TABELA_USUARIO, campos, TabelaUsuario.COLUNA_CPF + " = '" + cpf + "'", null, null, null, null);
+        cursor = sqLiteDatabase.query(TabelaUsuario.TABELA_USUARIO, campos, TabelaUsuario.COLUNA_CPF + " = ?", selectionArgs, null, null, null);
 
         if (cursor.moveToNext()) {
             senha = cursor.getString(1);
