@@ -12,7 +12,7 @@ import java.util.List;
 
 public class cadastrar extends Activity {
 
-    BancoDados bd;
+    bancoDados bd;
     EditText cpfUsuario;
 
     @Override
@@ -20,7 +20,8 @@ public class cadastrar extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar);
 
-         bd = new BancoDados(this);
+         bd = new bancoDados(this);
+      
         cpfUsuario = findViewById(R.id.idCpf);
         cpfUsuario.addTextChangedListener(MaskUtil.insert(cpfUsuario, MaskType.CPF));
     }

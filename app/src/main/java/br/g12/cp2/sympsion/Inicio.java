@@ -57,7 +57,7 @@ public class Inicio extends Activity {
             erro.setText("CPF não cadastrado");
         }
         else if(senhabd.equals(camposenha) == false){
-            erro.setText("Senha não cadastrada");
+            erro.setText("Senha inválida");
         }
 
         else {
