@@ -64,8 +64,8 @@ public class bancoDados extends SQLiteOpenHelper {
         String QUERY_COLUNA = "CREATE TABLE " + TabelaUsuario.TABELA_USUARIO + "("
                 + TabelaUsuario._ID + " INTEGER PRIMARY KEY NOT NULL, "
                 + TabelaUsuario.COLUNA_NOME +" TEXT NOT NULL, "
-                + TabelaUsuario.COLUNA_EMAIL + " TEXT NOT NULL, "
-                + TabelaUsuario.COLUNA_CPF + " TEXT NOT NULL, "
+                + TabelaUsuario.COLUNA_EMAIL + " TEXT NOT NULL UNIQUE, "
+                + TabelaUsuario.COLUNA_CPF + " TEXT NOT NULL UNIQUE, "
                 + TabelaUsuario.COLUNA_SENHA + " TEXT NOT NULL) ";
 
         sqLiteDatabase.execSQL(QUERY_COLUNA);
