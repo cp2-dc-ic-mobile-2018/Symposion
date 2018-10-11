@@ -1,5 +1,5 @@
 package br.g12.cp2.sympsion;
-
+import android.content.SharedPreferences;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,8 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.ArrayList;
 import java.util.List;
 public class QrC extends Activity {
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     Button AbreS;
     int x = 0;
     List<String> participantes;
@@ -73,6 +75,7 @@ public class QrC extends Activity {
         }
     }
     private void alert(String msg){
+
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
     }
 }
