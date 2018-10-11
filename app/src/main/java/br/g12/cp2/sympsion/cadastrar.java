@@ -12,14 +12,14 @@ import java.util.List;
 
 public class cadastrar extends Activity {
 
-    BancoDados bd;
+    bancoDados bd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar);
 
-         bd = new BancoDados(this);
+         bd = new bancoDados(this);
     }
 
     public void enviar (View view) {
