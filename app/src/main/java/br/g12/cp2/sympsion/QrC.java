@@ -83,9 +83,11 @@ public class QrC extends Activity {
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
     }
 
-    String metodo(String parametro){
-        
-        String selectQuery =
+    //String metodo(String parametro){
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO " + TABELA_PALESTRAUSUARIO + "(COLUNA_IDUSUARIO, COLUNA_IDPALESTRA) VALUES ( id, usuario )");
+    }
+        /*String selectQuery =
                 "SELECT * FROM usuario WHERE cpf =" + parametro;
         BancoDados  Bd =  new BancoDados(this);
         SQLiteDatabase banco = Bd.getWritableDatabase();
@@ -95,7 +97,6 @@ public class QrC extends Activity {
         cursor.moveToFirst();
 
         String nomeString = cursor.getString(cursor.getColumnIndex('id'));
-        return nomeString;
-
-    }
+        return nomeString;*/
+    //}
 }
