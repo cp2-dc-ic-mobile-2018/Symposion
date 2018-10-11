@@ -13,6 +13,7 @@ import java.util.List;
 public class cadastrar extends Activity {
 
     bancoDados bd;
+    EditText cpfUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,9 @@ public class cadastrar extends Activity {
         setContentView(R.layout.activity_cadastrar);
 
          bd = new bancoDados(this);
+      
+        cpfUsuario = findViewById(R.id.idCpf);
+        cpfUsuario.addTextChangedListener(MaskUtil.insert(cpfUsuario, MaskType.CPF));
     }
 
     public void enviar (View view) {
@@ -28,12 +32,12 @@ public class cadastrar extends Activity {
         String nome = nomeUsuario.getText().toString();
 
         EditText senhaUsuario = findViewById(R.id.idSenha);
-        String senha = nomeUsuario.getText().toString();
+        String senha = senhaUsuario.getText().toString();
 
         EditText emailUsuario = findViewById(R.id.idEmail);
         String email = emailUsuario.getText().toString();
 
-        EditText cpfUsuario = findViewById(R.id.idCpf);
+        cpfUsuario = findViewById(R.id.idCpf);
         String cpf = cpfUsuario.getText().toString();
 
         intent.putExtra("nome", nome);
