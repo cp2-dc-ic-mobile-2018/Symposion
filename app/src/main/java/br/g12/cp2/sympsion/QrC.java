@@ -1,13 +1,17 @@
 package br.g12.cp2.sympsion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +22,9 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.ArrayList;
 import java.util.List;
 public class QrC extends Activity {
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
+    EditText campoId;
     Button AbreS;
     int x = 0;
     List<String> participantes;
@@ -85,18 +92,15 @@ public class QrC extends Activity {
 
     //String metodo(String parametro){
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO " + TABELA_PALESTRAUSUARIO + "(COLUNA_IDUSUARIO, COLUNA_IDPALESTRA) VALUES ( id, usuario )");
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(QrC.this);
+        campoId.setText(sharedPreferences.getString("ID", "Não encontrado"));
+
+
+
+        //sharedPreferences = getSharedPreferences(getString(R.string.), Context.MODE_PRIVATE);
+        //String result = sharedPreferences.getString(getString(R.string.), "Id");
+
+        //db.execSQL("INSERT INTO " + TABELA_PALESTRAUSUARIO + "(COLUNA_IDUSUARIO, COLUNA_IDPALESTRA) VALUES ( id, usuario )");
     }
-        /*String selectQuery =
-                "SELECT * FROM usuario WHERE cpf =" + parametro;
-        BancoDados  Bd =  new BancoDados(this);
-        SQLiteDatabase banco = Bd.getWritableDatabase();
 
-        Cursor cursor = banco.rawQuery(selectQuery, null);
-
-        cursor.moveToFirst();
-
-        String nomeString = cursor.getString(cursor.getColumnIndex('id'));
-        return nomeString;*/
-    //}
 }
