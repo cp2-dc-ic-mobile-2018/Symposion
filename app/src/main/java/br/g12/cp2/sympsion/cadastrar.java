@@ -23,12 +23,13 @@ public class cadastrar extends Activity {
     }
 
     public void enviar (View view) {
-        Intent intent = new Intent(this, cadastrado.class);
+        Intent intent = new Intent(this, Palestras.class);
+
         EditText nomeUsuario = findViewById(R.id.idNome);
         String nome = nomeUsuario.getText().toString();
 
         EditText senhaUsuario = findViewById(R.id.idSenha);
-        String senha = nomeUsuario.getText().toString();
+        String senha = senhaUsuario.getText().toString();
 
         EditText emailUsuario = findViewById(R.id.idEmail);
         String email = emailUsuario.getText().toString();
@@ -39,8 +40,9 @@ public class cadastrar extends Activity {
         intent.putExtra("nome", nome);
         intent.putExtra("email", email);
         intent.putExtra("cpf", cpf);
+        intent.putExtra("senha", senha);
 
-        //startActivity(intent);
+        startActivity(intent);
 
         // TESTE DO CRUD //
 
@@ -55,8 +57,7 @@ public class cadastrar extends Activity {
             msg += u.getCpf() + " - " + u.getEmail() + '\n';
         }
 
-        TextView lista = findViewById(R.id.lista);
-        lista.setText(msg);
+
 
 
     }

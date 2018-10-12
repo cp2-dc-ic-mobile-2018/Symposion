@@ -1,13 +1,17 @@
 package br.g12.cp2.sympsion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import android.content.SharedPreferences;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
@@ -15,12 +19,14 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+
 public class gerarQr extends Activity {
 
+    SharedPreferences dadosusuario;
     Button btnGerar;
-    EditText nome;
-    EditText cpf;
     ImageView codigo;
+    EditText campocpf;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +48,21 @@ public class gerarQr extends Activity {
     }
 
     private void gerarQRcode() {
-        String texto = nome.getText().toString();
-        String tcpf = cpf.getText().toString();
+
+        btnGerar.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View view) {
+
+               dadosusuario = PreferenceManager.getDefaultSharedPreferences(gerarQr.this);
+
+               campocpf.setText(dadosusuario.getString("CPF", "Não encontrado"));
+
+           }
+        });
+
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
-        String resultado = texto + ";" + tcpf;
+        String resultado = campocpf + ";" + campocpf; // O primeiro "campocpf" seria o nome que está faltando no shared preferences
 
         try {
             BitMatrix bitMatrix = multiFormatWriter.encode(resultado, BarcodeFormat.QR_CODE, 300,300);
@@ -62,8 +78,8 @@ public class gerarQr extends Activity {
 
     private void iniciarComponentes() {
         btnGerar = (Button) findViewById(R.id.btnGerar);
-        nome = (EditText) findViewById(R.id.nome);
-        cpf = (EditText) findViewById(R.id.cpf);
+        //nome = (EditText) findViewById(R.id.nome);
+        campocpf = (EditText) findViewById(R.id.cpf);
         codigo = (ImageView) findViewById(R.id.codigo);
 
     }
