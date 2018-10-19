@@ -142,6 +142,31 @@ public class bancoDados extends SQLiteOpenHelper {
 
    }
 
+    public Usuarios buscaUserCpf(String cpf)
+    {
+
+        String campocpf;
+        String[] selectionArgs = {cpf};
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TabelaUsuario.TABELA_USUARIO, null, TabelaUsuario.COLUNA_CPF + " = ?", selectionArgs, null, null, null);
+
+        Usuarios usuarios1;
+        if (cursor.moveToNext()) {
+            usuarios1 = new Usuarios();
+            usuarios1.setCpf(cursor.getString(3));
+            usuarios1.setEmail(cursor.getString(2));
+            usuarios1.setId(cursor.getInt(0));
+            usuarios1.setNome(cursor.getString(1));
+            usuarios1.setSenha(cursor.getString(4));
+        }
+        else {
+            usuarios1 = null;
+        }
+
+        sqLiteDatabase.close();
+        return usuarios1;
+    }
+
 
    private void criaPalestrasTeste(SQLiteDatabase sqLiteDatabase) {
         List<dadosPalestra> palestras = new ArrayList<dadosPalestra>();

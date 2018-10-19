@@ -3,6 +3,7 @@ package br.g12.cp2.sympsion;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,7 +26,7 @@ public class gerarQr extends Activity {
     SharedPreferences dadosusuario;
     Button btnGerar;
     ImageView codigo;
-    EditText campocpf;
+    bancoDados bd;
 
 
     @Override
@@ -34,35 +35,22 @@ public class gerarQr extends Activity {
         setContentView(R.layout.activity_gerar_qr);
 
         iniciarComponentes();
-        clickButton();
+
+        bd = new bancoDados(this);
+        dadosusuario = PreferenceManager.getDefaultSharedPreferences(gerarQr.this);
     }
 
-    private void clickButton() {
-        btnGerar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) { gerarQRcode(); }
+    public void gerarQRcode(View v) {
+       String cpf = dadosusuario.getString("CPF", "Não encontrado");
 
-            }
+       Usuarios informação = bd.buscaUserCpf(cpf);
 
-        );
-    }
+       String campoNome = informação.getNome();
 
-    private void gerarQRcode() {
-
-        btnGerar.setOnClickListener(new View.OnClickListener(){
-           @Override
-           public void onClick(View view) {
-
-               dadosusuario = PreferenceManager.getDefaultSharedPreferences(gerarQr.this);
-
-               campocpf.setText(dadosusuario.getString("CPF", "Não encontrado"));
-
-           }
-        });
 
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
-        String resultado = campocpf + ";" + campocpf; // O primeiro "campocpf" seria o nome que está faltando no shared preferences
+        String resultado = campoNome + ";" + cpf;
 
         try {
             BitMatrix bitMatrix = multiFormatWriter.encode(resultado, BarcodeFormat.QR_CODE, 300,300);
@@ -78,10 +66,7 @@ public class gerarQr extends Activity {
 
     private void iniciarComponentes() {
         btnGerar = (Button) findViewById(R.id.btnGerar);
-        //nome = (EditText) findViewById(R.id.nome);
-        campocpf = (EditText) findViewById(R.id.cpf);
         codigo = (ImageView) findViewById(R.id.codigo);
-
     }
 }
 
