@@ -100,7 +100,7 @@ public class QrC extends Activity {
         //sharedPreferences = getSharedPreferences(getString(R.string.), Context.MODE_PRIVATE);
         //String result = sharedPreferences.getString(getString(R.string.), "Id");
 
-        //db.execSQL("INSERT INTO " + TABELA_PALESTRAUSUARIO + "(COLUNA_IDUSUARIO, COLUNA_IDPALESTRA) VALUES ( id, usuario )");
+        db.execSQL("INSERT INTO " + "TABELA_PALESTRAUSUARIO" + "(COLUNA_IDUSUARIO, COLUNA_IDPALESTRA) VALUES ( campoId, usuario )");
     }
 
 }
