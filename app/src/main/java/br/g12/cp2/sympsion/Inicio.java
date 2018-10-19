@@ -14,6 +14,7 @@ public class Inicio extends Activity {
     SharedPreferences dadosusuario;
     EditText cpf;
     EditText senha;
+    TextView erro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,28 +36,37 @@ public class Inicio extends Activity {
 
     public void palestras(View view){
         Intent intent = new Intent(this, Palestras.class);
-        TextView erro = findViewById(R.id.erro);
+        erro = findViewById(R.id.erro);
+
         cpf = findViewById(R.id.cpf);
+        String campocpf = cpf.getText().toString();
+
         senha = findViewById(R.id.senha);
+        String camposenha = senha.getText().toString();
+
+        bancoDados banco = new bancoDados(getBaseContext());
+        String senhabd = banco.VerificaCPF(campocpf);
+
         if(cpf.length() < 11) {
             erro.setText("CPF Inválido");
         }
         else if(senha.length() < 8){
             erro.setText("A senha deve estar entre 8 a 12 caracteres");
         }
-        /*
-        else if(//buscar CPF do usuário no cadastro){
+        else if(senhabd == null){
             erro.setText("CPF não cadastrado");
         }
-        else if(//buscar senha do usuário no cadastro){
-            erro.setText("Senha não cadastrada");
+        else if(senhabd.equals(camposenha) == false){
+            erro.setText("Senha inválida");
         }
-         */
+
         else {
             dadosusuario = PreferenceManager.getDefaultSharedPreferences(Inicio.this);
+
             SharedPreferences.Editor myEditor = dadosusuario.edit();
-            String campocpf = cpf.getText().toString();
-            String camposenha = senha.getText().toString();
+            String nome = banco.RetornaNome(campocpf);
+
+            myEditor.putString("NOME", nome);
             myEditor.putString("CPF", campocpf);
             myEditor.putString("SENHA", camposenha);
             myEditor.commit();
@@ -65,13 +75,14 @@ public class Inicio extends Activity {
         }
     }
     public void cadastrar(View view){
-
         Intent intent = new Intent(this, cadastrar.class);
         startActivity(intent);
-
     }
     protected void onResume() {
         super.onResume();
         senha.setText("");
+        if(erro != null){
+            erro.setText("");
+        }
     }
 }
