@@ -44,7 +44,7 @@ public class Inicio extends Activity {
         senha = findViewById(R.id.senha);
         String camposenha = senha.getText().toString();
 
-        BancoDados banco = new BancoDados(getBaseContext());
+        bancoDados banco = new bancoDados(getBaseContext());
         String senhabd = banco.VerificaCPF(campocpf);
 
         if(cpf.length() < 11) {
@@ -62,7 +62,11 @@ public class Inicio extends Activity {
 
         else {
             dadosusuario = PreferenceManager.getDefaultSharedPreferences(Inicio.this);
+
             SharedPreferences.Editor myEditor = dadosusuario.edit();
+            String nome = banco.RetornaNome(campocpf);
+
+            myEditor.putString("NOME", nome);
             myEditor.putString("CPF", campocpf);
             myEditor.putString("SENHA", camposenha);
             myEditor.commit();
