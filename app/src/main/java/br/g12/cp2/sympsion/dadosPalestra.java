@@ -18,6 +18,7 @@ public class dadosPalestra {
     {
         this.id = _id;
         this.nome = _nome;
+        this.horario = _horario;
         this.duracao = _duracao;
         this.limiteP = _limiteP;
         this.lugar = _lugar;

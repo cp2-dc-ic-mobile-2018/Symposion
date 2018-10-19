@@ -142,6 +142,31 @@ public class bancoDados extends SQLiteOpenHelper {
 
    }
 
+    public Usuarios buscaUserCpf(String cpf)
+    {
+
+        String campocpf;
+        String[] selectionArgs = {cpf};
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(TabelaUsuario.TABELA_USUARIO, null, TabelaUsuario.COLUNA_CPF + " = ?", selectionArgs, null, null, null);
+
+        Usuarios usuarios1;
+        if (cursor.moveToNext()) {
+            usuarios1 = new Usuarios();
+            usuarios1.setCpf(cursor.getString(3));
+            usuarios1.setEmail(cursor.getString(2));
+            usuarios1.setId(cursor.getInt(0));
+            usuarios1.setNome(cursor.getString(1));
+            usuarios1.setSenha(cursor.getString(4));
+        }
+        else {
+            usuarios1 = null;
+        }
+
+        sqLiteDatabase.close();
+        return usuarios1;
+    }
+
 
    private void criaPalestrasTeste(SQLiteDatabase sqLiteDatabase) {
         List<dadosPalestra> palestras = new ArrayList<dadosPalestra>();
@@ -198,6 +223,52 @@ public class bancoDados extends SQLiteOpenHelper {
         }
         sqLiteDatabase.close();
         return senha;
+    }
+
+    public String RetornaNome(String cpf) {
+        Cursor cursor;
+        String nome;
+        String[] campos = {TabelaUsuario.COLUNA_NOME};
+        String[] selectionArgs = {cpf};
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        cursor = sqLiteDatabase.query(TabelaUsuario.TABELA_USUARIO, campos, TabelaUsuario.COLUNA_CPF + " = ?", selectionArgs, null, null, null);
+
+        if (cursor.moveToNext()) {
+            nome = cursor.getString(0);
+        } else {
+            nome = null;
+        }
+        sqLiteDatabase.close();
+        return nome;
+    }
+
+    public Cursor ListaPalestras() {
+        Cursor cursor;
+        String[] campos = {TabelaPalestra._ID, TabelaPalestra.COLUNA_NOME, TabelaPalestra.COLUNA_HORARIO, TabelaPalestra.COLUNA_DURACAO, TabelaPalestra.COLUNA_LIMITEP, TabelaPalestra.COLUNA_LUGAR, TabelaPalestra.COLUNA_DESCRICAO};
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        cursor = sqLiteDatabase.query(TabelaPalestra.TABELA_PALESTRA, campos, null, null, null, null, null);
+
+        List<dadosPalestra> lista = new ArrayList<dadosPalestra>();
+        while(cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String nome = cursor.getString(1);
+            String horario = cursor.getString(2);
+            int duracao = cursor.getInt(3);
+            int limitep = cursor.getInt(4);
+            String lugar = cursor.getString(5);
+            String descricao = cursor.getString(6);
+            dadosPalestra palestra = new dadosPalestra();
+            palestra.setId(id);
+            palestra.setNome(nome);
+            palestra.setHorario(horario);
+            palestra.setDuracao(duracao);
+            palestra.setLimiteP(limitep);
+            palestra.setLugar(lugar);
+            palestra.setDescricao(descricao);
+            lista.add(palestra);
+        }
+        sqLiteDatabase.close();
+        return cursor;
     }
 }
 
