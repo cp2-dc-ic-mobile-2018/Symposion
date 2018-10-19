@@ -23,7 +23,7 @@ public class Palestras extends Activity {
 
         bancoDados banco = new bancoDados(getBaseContext());
 
-        final SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, banco.ListaPalestras(), new String[]{"nome"/*, "horario", "duração", "limitePessoas", "lugar", "descrição"*/}, new int[]{android.R.id.text1});
+        final SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this, R.layout.lista, banco.ListaPalestras(), new String[]{"nome", "horario", "duração", "limitePessoas", "lugar", "descrição"}, new int[]{R.id.text1, R.id.text2, R.id.text3, R.id.text4, R.id.text5, R.id.text6});
         lista.setAdapter(adaptador);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
