@@ -1,5 +1,5 @@
 package br.g12.cp2.sympsion;
-
+import android.content.SharedPreferences;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -87,6 +87,7 @@ public class QrC extends Activity {
         }
     }
     private void alert(String msg){
+
         Toast.makeText(getApplicationContext(),msg,Toast.LENGTH_LONG).show();
     }
 
