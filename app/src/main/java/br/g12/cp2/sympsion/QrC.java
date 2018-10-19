@@ -22,9 +22,10 @@ import com.google.zxing.integration.android.IntentResult;
 import java.util.ArrayList;
 import java.util.List;
 public class QrC extends Activity {
+    bancoDados bd;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    EditText campoId;
+    long campoId;
     Button AbreS;
     int x = 0;
     List<String> participantes;
@@ -33,6 +34,8 @@ public class QrC extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        bd = new bancoDados(this);
         setContentView(R.layout.activity_qr_c);
         AbreS = (Button) findViewById(R.id.AbreS);
         alert("Programa inciado");
@@ -56,6 +59,9 @@ public class QrC extends Activity {
         adaptador = new separacaocpfnome(this, android.R.layout.simple_list_item_1, participantes);
         lista.setAdapter(adaptador);
 
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(QrC.this);
+        campoId = sharedPreferences.getLong("ID", -999);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -68,15 +74,25 @@ public class QrC extends Activity {
 
                 participantes.add(string);
 
-                //String[] parts = string.split(";");
-                //String part1 = parts[0]; // 004-
-                //String part2 = parts[1];
+                String[] parts = string.split(";");
+                String part1 = parts[0]; // 004-
+                String part2 = parts[1];
                 //participantes.add("Nome do meliante: " + part1 + " (CPF: " + part2 + ")");
 
                 adaptador.notifyDataSetChanged();
                 x++;
                 TextView msgem = findViewById(R.id.msgee);
                 msgem.setText(String.valueOf(x));
+
+                Usuarios a = bd.buscaUserCpf(part2);
+
+                if (a != null) {
+                    bd.addMeliante(campoId, a.getId());
+                }
+                else {
+                    Toast.makeText(this, "Usário " + part2 + " não cadastrado", Toast.LENGTH_LONG).show();
+                }
+
             }
             else{
                 alert("Scanner cancelado");
@@ -85,6 +101,7 @@ public class QrC extends Activity {
         else{
             super.onActivityResult(requestCode, resultCode, data);
         }
+
     }
     private void alert(String msg){
 
@@ -92,16 +109,8 @@ public class QrC extends Activity {
     }
 
     //String metodo(String parametro){
-    public void onCreate(SQLiteDatabase db) {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(QrC.this);
-        campoId.setText(sharedPreferences.getString("ID", "Não encontrado"));
+    //public void onCreate(SQLiteDatabase db) {
 
-
-
-        //sharedPreferences = getSharedPreferences(getString(R.string.), Context.MODE_PRIVATE);
-        //String result = sharedPreferences.getString(getString(R.string.), "Id");
-
-        db.execSQL("INSERT INTO " + "TABELA_PALESTRAUSUARIO" + "(COLUNA_IDUSUARIO, COLUNA_IDPALESTRA) VALUES ( campoId, usuario )");
-    }
+    //}
 
 }

@@ -119,6 +119,19 @@ public class bancoDados extends SQLiteOpenHelper {
 
     }
 
+    void addMeliante(long idPalestra , int idUsuario)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(TabelaPalestraUsuario.COLUNA_IDUSUARIO, idUsuario);
+        values.put(TabelaPalestraUsuario.COLUNA_IDPALESTRA, idPalestra);
+
+        sqLiteDatabase.insert(TabelaPalestraUsuario.TABELA_PALESTRAUSUARIO, null, values);
+        sqLiteDatabase.close();
+
+    }
 
     List<Usuarios> selecionarUsuario() {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
