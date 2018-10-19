@@ -31,12 +31,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".cadastrado">
-            <intent-filter>
-                <action android:name="br.g12.cp2.sympsion.CADASTRADO"/>
-            </intent-filter>
-        </activity>
-
         <activity android:name=".Palestras"></activity>
 
         <activity android:name=".QrC">
