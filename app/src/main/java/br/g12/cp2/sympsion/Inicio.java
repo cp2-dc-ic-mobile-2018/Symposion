@@ -16,6 +16,7 @@ public class Inicio extends Activity {
     EditText cpf;
     EditText senha;
     TextView erro;
+    bancoDados banco;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +66,7 @@ public class Inicio extends Activity {
         senha = findViewById(R.id.senha);
         String camposenha = senha.getText().toString();
 
-        bancoDados banco = new bancoDados(getBaseContext());
+        banco = new bancoDados(getBaseContext());
         String senhabd = banco.VerificaCPF(campocpf);
 
         if(cpf.length() < 11) {
@@ -97,8 +98,32 @@ public class Inicio extends Activity {
     }
     public void cadastrar(View view){
         Intent intent = new Intent(this, cadastrar.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == cadastrar.RESULT_OK && requestCode == 1) {
+            String cpf = data.getStringExtra("cpf");
+            String senha = data.getStringExtra("senha");
+            dadosusuario = PreferenceManager.getDefaultSharedPreferences(Inicio.this);
+
+            SharedPreferences.Editor myEditor = dadosusuario.edit();
+            banco = new bancoDados(getBaseContext());
+            String nome = banco.RetornaNome(cpf);
+
+            myEditor.putString("NOME", nome);
+            myEditor.putString("CPF", cpf);
+            myEditor.putString("SENHA", senha);
+            myEditor.commit();
+
+            Intent intent = new Intent(this, Palestras.class);
+            startActivity(intent);
+        }
+    }
+
     protected void onResume() {
         super.onResume();
         senha.setText("");
