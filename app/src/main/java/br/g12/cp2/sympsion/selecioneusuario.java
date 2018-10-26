@@ -15,7 +15,6 @@ public class selecioneusuario extends Activity {
 
     public void teladevisitante(View view){
 
-
         // caso visitante a tela direcionará pro gerador do código qr
         Intent intent = new Intent(this, gerarQr.class);
         startActivity(intent);
@@ -29,8 +28,10 @@ public class selecioneusuario extends Activity {
 
     public void teladepalestrante(View view){
 
+
         //como nao foi definido nenhum caso especial para o palestrante, ele tambem será direcionado a tela de gerarQR
         Intent intent = new Intent(this, gerarQr.class);
         startActivity(intent);
     }
+
 }
