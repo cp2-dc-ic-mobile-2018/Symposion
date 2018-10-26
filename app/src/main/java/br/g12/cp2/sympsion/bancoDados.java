@@ -119,18 +119,37 @@ public class bancoDados extends SQLiteOpenHelper {
 
     }
 
-    void addMeliante(long idPalestra , int idUsuario)
+    void addMeliante(long idPalestra , int idUsuario, Usuarios.Papel papel)
     {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-
         ContentValues values = new ContentValues();
-
         values.put(TabelaPalestraUsuario.COLUNA_IDUSUARIO, idUsuario);
         values.put(TabelaPalestraUsuario.COLUNA_IDPALESTRA, idPalestra);
-
+        values.put(TabelaPalestraUsuario.COLUNA_PAPEL, papel.ordinal());
         sqLiteDatabase.insert(TabelaPalestraUsuario.TABELA_PALESTRAUSUARIO, null, values);
         sqLiteDatabase.close();
+    }
 
+    List<Usuarios> pegaMeliante( long idPalestra)
+    {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String QUERY_COLUNA = "select " + TabelaUsuario.COLUNA_NOME + ", " +  TabelaUsuario.COLUNA_CPF +
+                " from " + TabelaUsuario.TABELA_USUARIO + " join " + TabelaPalestraUsuario.TABELA_PALESTRAUSUARIO +
+                " on " + TabelaUsuario._ID + " = " + TabelaPalestraUsuario.COLUNA_IDUSUARIO +
+                " where "  + TabelaPalestraUsuario.COLUNA_IDPALESTRA + " = " + idPalestra;
+
+        Cursor a = sqLiteDatabase.rawQuery(QUERY_COLUNA, null);
+
+        List<Usuarios> lista = new ArrayList<Usuarios>();
+        while(a.moveToNext()) {
+            String nome = a.getString(0);
+            String cpf = a.getString(1);
+            Usuarios usuarios1 = new Usuarios();
+            usuarios1.setNome(nome);
+            usuarios1.setCpf(cpf);
+            lista.add(usuarios1);
+        }
+        return lista;
     }
 
     List<Usuarios> selecionarUsuario() {

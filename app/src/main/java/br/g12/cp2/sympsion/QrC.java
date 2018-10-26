@@ -27,10 +27,10 @@ public class QrC extends Activity {
     private SharedPreferences.Editor editor;
     long campoId;
     Button AbreS;
-    int x = 0;
-    List<String> participantes;
-    ArrayAdapter<String> adaptador;
+    List<Usuarios> participantes;
+    ArrayAdapter<Usuarios> adaptador;
     ListView lista;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +38,7 @@ public class QrC extends Activity {
         bd = new bancoDados(this);
         setContentView(R.layout.activity_qr_c);
         AbreS = (Button) findViewById(R.id.AbreS);
-        alert("Programa inciado");
+        //alert("Programa inciado");
         final Activity activity = this;
         AbreS.setOnClickListener(new View.OnClickListener() {
 
@@ -53,15 +53,15 @@ public class QrC extends Activity {
                                  }
         );
         lista = (ListView) findViewById(R.id.lista);
-        participantes = new ArrayList<String>();
+        participantes = bd.pegaMeliante(campoId);
 
         //adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, participantes);
         adaptador = new separacaocpfnome(this, android.R.layout.simple_list_item_1, participantes);
         lista.setAdapter(adaptador);
 
 
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(QrC.this);
-        campoId = sharedPreferences.getLong("ID", -999);
+        Intent Intentizada = getIntent();
+        campoId = Intentizada.getLongExtra("ID", -999);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -72,25 +72,23 @@ public class QrC extends Activity {
                 alert(result.getContents());
                 String string = result.getContents();
 
-                participantes.add(string);
-
-                String[] parts = string.split(";");
+                String[] parts = string.trim().split(";");
                 String part1 = parts[0]; // 004-
                 String part2 = parts[1];
-                //participantes.add("Nome do meliante: " + part1 + " (CPF: " + part2 + ")");
 
-                adaptador.notifyDataSetChanged();
-                x++;
                 TextView msgem = findViewById(R.id.msgee);
-                msgem.setText(String.valueOf(x));
+
 
                 Usuarios a = bd.buscaUserCpf(part2);
 
                 if (a != null) {
-                    bd.addMeliante(campoId, a.getId());
+                    bd.addMeliante(campoId, a.getId(), Usuarios.Papel.VISITANTE);
+                    participantes = bd.pegaMeliante(campoId);
+                    msgem.setText(participantes.size());
+                    adaptador.notifyDataSetChanged();
                 }
                 else {
-                    Toast.makeText(this, "Usário " + part2 + " não cadastrado", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Usuário " + part2 + " não cadastrado", Toast.LENGTH_LONG).show();
                 }
 
             }

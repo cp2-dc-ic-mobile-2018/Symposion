@@ -1,6 +1,13 @@
 package br.g12.cp2.sympsion;
 
 public class Usuarios {
+
+    enum Papel {
+        PALESTRANTE,
+        VOLUNTARIO,
+        VISITANTE
+    }
+
     int id;
     String nome;
     String email;

@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 
 public class selecioneusuario extends Activity {
-
+    long id_palestra;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selecioneusuario);
+        Intent Intentizada = getIntent();
+        id_palestra = Intentizada.getLongExtra("ID", -999);
     }
 
     public void teladevisitante(View view){
@@ -23,6 +25,7 @@ public class selecioneusuario extends Activity {
     public void telavoluntario(View view){
 
         Intent intent = new Intent(this, QrC.class);
+        intent.putExtra("ID", id_palestra);
         startActivity(intent);
     }
 
