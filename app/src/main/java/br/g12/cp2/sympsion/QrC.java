@@ -82,9 +82,10 @@ public class QrC extends Activity {
                 Usuarios a = bd.buscaUserCpf(part2);
 
                 if (a != null) {
+                    //PENDENTE: Tratar casos de usuários que já foram inseridos.
                     bd.addMeliante(campoId, a.getId(), Usuarios.Papel.VISITANTE);
                     participantes = bd.pegaMeliante(campoId);
-                    msgem.setText(participantes.size());
+                    msgem.setText(String.valueOf(participantes.size()));
                     adaptador.notifyDataSetChanged();
                 }
                 else {
