@@ -64,11 +64,15 @@ public class Usuarios {
         this.cpf = cpf;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getHashSenha(){ return  senha;}
+
+    public Boolean verificaSenha(String senha) {
+
+        return HashSenha.verifica(senha,this.senha);
     }
 
     public void setSenha(String senha) {
-        this.senha = senha;
+
+        this.senha = HashSenha.encripta(senha);
     }
 }

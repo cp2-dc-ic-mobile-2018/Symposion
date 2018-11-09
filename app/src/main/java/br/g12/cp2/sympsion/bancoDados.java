@@ -112,7 +112,7 @@ public class bancoDados extends SQLiteOpenHelper {
        values.put(TabelaUsuario.COLUNA_NOME, usuarios.getNome());
         values.put(TabelaUsuario.COLUNA_EMAIL, usuarios.getEmail());
        values.put(TabelaUsuario.COLUNA_CPF, usuarios.getCpf());
-       values.put(TabelaUsuario.COLUNA_SENHA, usuarios.getSenha());
+       values.put(TabelaUsuario.COLUNA_SENHA, usuarios.getHashSenha());
 
        sqLiteDatabase.insert(TabelaUsuario.TABELA_USUARIO, null, values);
        sqLiteDatabase.close();
@@ -201,7 +201,7 @@ public class bancoDados extends SQLiteOpenHelper {
             values.put(TabelaUsuario.COLUNA_NOME, usuario.getNome());
             values.put(TabelaUsuario.COLUNA_EMAIL, usuario.getEmail());
             values.put(TabelaUsuario.COLUNA_CPF, usuario.getCpf());
-            values.put(TabelaUsuario.COLUNA_SENHA, usuario.getSenha());
+            values.put(TabelaUsuario.COLUNA_SENHA, usuario.getHashSenha());
 
             sqLiteDatabase.insert(TabelaUsuario.TABELA_USUARIO, null, values);
 
