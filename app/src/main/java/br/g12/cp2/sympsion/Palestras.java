@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 public class Palestras extends Activity {
     ListView lista;
@@ -19,7 +18,7 @@ public class Palestras extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_palestras);
-        lista = (ListView) findViewById(R.id.lista);
+        lista = findViewById(R.id.lista);
 
         bancoDados banco = new bancoDados(getBaseContext());
 
@@ -29,14 +28,12 @@ public class Palestras extends Activity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Cursor cursor = ((SimpleCursorAdapter) adaptador).getCursor();
+                Cursor cursor = adaptador.getCursor();
                 cursor.moveToPosition(position);
                 long id_palestra = cursor.getLong(cursor.getColumnIndex(bancoDados.TabelaPalestra._ID));
-                //Toast.makeText(Palestras.this, Long.toString(id_palestra), Toast.LENGTH_LONG).show();
 
                 SharedPreferences dadosusuario = PreferenceManager.getDefaultSharedPreferences(Palestras.this);
                 String nome = dadosusuario.getString("NOME", null);
-                //Toast.makeText(Palestras.this, nome, Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(view.getContext(), selecioneusuario.class);
                 intent.putExtra("NOME", nome);
